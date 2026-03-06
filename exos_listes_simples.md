@@ -1,19 +1,18 @@
 # Exercices sur les listes simples
 
-## 1. Sommaire
-- [1. Sommaire](#1-sommaire)
-- [2. Liste : négatif -\> opposé](#2-liste--négatif---opposé)
-- [3. Liste des carrés entre deux nombres](#3-liste-des-carrés-entre-deux-nombres)
-- [4. Liste d’entiers consécutifs décroissants et alternant de signe](#4-liste-dentiers-consécutifs-décroissants-et-alternant-de-signe)
-- [5. Séparer en indices pairs et indices impairs](#5-séparer-en-indices-pairs-et-indices-impairs)
-- [6. Liste des entiers impairs suivi des pairs](#6-liste-des-entiers-impairs-suivi-des-pairs)
-- [7. Rotation de liste](#7-rotation-de-liste)
-- [8. Un, deux ou cinq](#8-un-deux-ou-cinq)
-- [9. Inverser indices et valeurs dans une liste](#9-inverser-indices-et-valeurs-dans-une-liste)
-- [10. Affichage en tas binaire (une seule boucle for)](#10-affichage-en-tas-binaire-une-seule-boucle-for)
-- [11. Afficher toutes les dates de l’année](#11-afficher-toutes-les-dates-de-lannée)
+**Sommaire**
+- [1. Liste : négatif -\> opposé](#1-liste--négatif---opposé)
+- [2. Liste des carrés entre deux nombres](#2-liste-des-carrés-entre-deux-nombres)
+- [3. Liste d’entiers consécutifs décroissants et alternant de signe](#3-liste-dentiers-consécutifs-décroissants-et-alternant-de-signe)
+- [4. Séparer en indices pairs et indices impairs](#4-séparer-en-indices-pairs-et-indices-impairs)
+- [5. Liste des entiers impairs suivi des pairs](#5-liste-des-entiers-impairs-suivi-des-pairs)
+- [6. Rotation de liste](#6-rotation-de-liste)
+- [7. Un, deux ou cinq](#7-un-deux-ou-cinq)
+- [8. Inverser indices et valeurs dans une liste](#8-inverser-indices-et-valeurs-dans-une-liste)
+- [9. Affichage en tas binaire (une seule boucle for)](#9-affichage-en-tas-binaire-une-seule-boucle-for)
+- [10. Afficher toutes les dates de l’année](#10-afficher-toutes-les-dates-de-lannée)
 
-## 2. Liste : négatif -> opposé
+## 1. Liste : négatif -> opposé
 On donne une liste `L` d’entiers et on demande d’écrire un code qui modifie `L` en sorte que chaque élément `x` négatif de `L` est changé en son opposé `−x`. Par exemple, si `L = [42,-9, 81,-12,-65, 0, 46]` alors `L` doit être modifiée en la liste `[42, 9, 81, 12, 65, 0, 46]`
 Exemple :
 ```python
@@ -22,7 +21,7 @@ b = 2025
 L =[2035, -2034, 2033, -2032, 2031, -2030, 2029, -2028, 2027, -2026, 2025]
 ```
 
-## 3. Liste des carrés entre deux nombres
+## 2. Liste des carrés entre deux nombres
 On donne deux entiers positifs $a,b$ avec $a\leq b$. Créer,la liste croissante des carrés parfaits entre a et b.
 
 Exemple :
@@ -42,10 +41,10 @@ L=[2025, 2116, 2209, 2304, 2401, 2500, 2601, 2704, 2809]
 > ```python
 > round(1.618) # Renvoi 2
 
-## 4. Liste d’entiers consécutifs décroissants et alternant de signe
+## 3. Liste d’entiers consécutifs décroissants et alternant de signe
 On donne deux entiers `a` et `b` avec $a\geq b\geq 0$, par exemple `a=2035` et `b=2025`. On demande de créer la liste des entiers consécutifs depuis `a` jusqu’à `b` en ordre décroissant et en alternant les signes, `a` devant apparaître positivement. 
 
-## 5. Séparer en indices pairs et indices impairs
+## 4. Séparer en indices pairs et indices impairs
 Soit une liste L. Séparer cette liste en deux listes distinctes :
 - La liste IP des éléments de L d’indices pairs.
 - La liste II des éléments de L d’indices impairs.
@@ -57,7 +56,7 @@ IP = [31, 9, 81]
 II = [12, 65, 42]
 ```
 
-## 6. Liste des entiers impairs suivi des pairs
+## 5. Liste des entiers impairs suivi des pairs
 On donne un entier $n\geq 1$ on demande d’écrire une liste `L` formée d’abord de tous les entiers
 impairs entre 1 et n puis de tous les entiers pairs
 
@@ -73,7 +72,7 @@ n=5
 L = [1,3,5,2,4]
 ```
 
-## 7. Rotation de liste
+## 6. Rotation de liste
 Voici, sur un exemple, ce que l’on veut coder dans le cas général. On se donne une liste, par exemple :
 ```python
 L = [17, 39, 61, 48, 42, 27, 75, 81, 64, 10]
@@ -98,7 +97,7 @@ Plus généralement, les éléments à partir de l’indice k se retrouvent en d
 > C = A+B # C vaut [1,2,3,4,5,6]
 > ```
 
-## 8. Un, deux ou cinq
+## 7. Un, deux ou cinq
 On considère la suite d’entiers suivante :
 ```text
 1, 2, 5, 10, 20, 50, 100, 200, 500, ...
@@ -108,7 +107,7 @@ où les nombres se suivent par paquet de trois en rajoutant à chaque paquet un 
 [1, 2, 5, 10, 20, 50, 100]
 ```
 
-## 9. Inverser indices et valeurs dans une liste
+## 8. Inverser indices et valeurs dans une liste
 On donne un entier $n\geq 0$ et on donne une liste `L` de `n` entiers qui contient une fois et une seule chaque entier entre `0 et n-1`. Par exemple, pour `n = 5`, on pourrait avoir :
 ```python
 L = [1, 4, 0, 3, 2]
@@ -123,7 +122,7 @@ M = [2, 0, 4, 3, 1]
 
 La construction de `M` ne doit pas modifier la liste `L`. On commencera par créer, avec la méthode `append()` une liste `M` de `n` entiers valant tous `−1` puis on remplira convenablement la liste `M`.
 
-## 10. Affichage en tas binaire (une seule boucle for)
+## 9. Affichage en tas binaire (une seule boucle for)
 Observez l’exemple suivant que l’on demande de coder dans toute sa généralité : on donne une liste `L` d’entiers telle que :
 ```python
 [99, 28, 51, 76, 85, 52, 97, 97, 20, 78, 74, 34, 72, 75]
@@ -143,7 +142,7 @@ Il est attendu de **n’utiliser qu’une seule boucle `for`** parcourant les é
 > - Maintenir une variable indiquant la longueur finale de la ligne que l’on est en train d’afficher.<br>
 > - Lorsqu’on arrive en fin de ligne, afficher un saut de ligne et réinitialiser le compteur.
 
-## 11. Afficher toutes les dates de l’année
+## 10. Afficher toutes les dates de l’année
 On vous demande d’afficher sur 365 lignes successives les dates de tous les jours de l’année.
 Pour simplifier on suppose que **février est formé de 28 jours**. Par exemple, si le jour de l’An est
 un vendredi, le code devra afficher :
