@@ -222,19 +222,18 @@ C = A + B   # C vaut [1, 2, 3, 4, 5, 6]
 On peut combiner slices et concaténation pour réorganiser une liste :
 
 ```python
-L = [17, 39, 61, 48, 42, 27, 75]
-k = 4
-nouvelle = L[k:] + L[:k]
-# nouvelle vaut [42, 27, 75, 17, 39, 61, 48]
+L = [10, 20, 30, 40, 50]
+# Inverser la liste en la découpant en deux moitiés
+nouvelle = L[3:] + L[:3]
+# nouvelle vaut [40, 50, 10, 20, 30]
 ```
 
 Pour **modifier la liste en place** (sans en créer une nouvelle), on peut réaffecter le contenu :
 
 ```python
-L = [17, 39, 61, 48, 42, 27, 75]
-k = 4
-L[:] = L[k:] + L[:k]
-# L vaut maintenant [42, 27, 75, 17, 39, 61, 48]
+L = [10, 20, 30, 40, 50]
+L[:] = L[3:] + L[:3]
+# L vaut maintenant [40, 50, 10, 20, 30]
 ```
 
 ---
@@ -245,11 +244,11 @@ Certains exercices demandent de modifier la liste `L` elle-même (sans en créer
 
 ```python
 # Modifier élément par élément
-L = [42, -9, 81, -12, -65, 0, 46]
+L = [3, 11, -5, 7, -2, 0, -8]
 for i in range(len(L)):
-    if L[i] < 0:
-        L[i] = -L[i]
-# L vaut [42, 9, 81, 12, 65, 0, 46]
+    if L[i] > 5:
+        L[i] = 0        # on met à zéro tous les éléments > 5
+# L vaut [3, 0, -5, 0, -2, 0, -8]
 ```
 
 ```python
@@ -283,8 +282,8 @@ round(3.5)   # 4    — arrondi à l'entier le plus proche
 
 ```python
 from math import sqrt, ceil
-a = 2000
-n = ceil(sqrt(a))   # n = 45 car 44² = 1936 < 2000 et 45² = 2025 ≥ 2000
+a = 50
+n = ceil(sqrt(a))   # n = 8 car 7² = 49 < 50 et 8² = 64 ≥ 50
 ```
 
 ---
@@ -436,15 +435,15 @@ del L[1:3]   # supprime les éléments aux indices 1 et 2
 
 ## Récapitulatif des notions par exercice
 
-| Exercice | Notions clés |
-|---|---|
-| 1. Négatif → opposé | Parcours par indice, modification en place, `if` |
-| 2. Carrés entre deux nombres | `append`, `sqrt`, `ceil`, boucle `for` |
-| 3. Consécutifs décroissants alternant de signe | `append`, compteur de signe, boucle `for` décroissante |
-| 4. Séparer en indices pairs/impairs | Parcours par indice, `% 2`, `append` |
-| 5. Impairs puis pairs | Deux boucles `for`, `append`, `% 2` |
-| 6. Rotation de liste | Slices, concaténation `+`, modification en place `L[:]` |
-| 7. Un, deux ou cinq | `append`, compteur de position `% 3`, `//` ou `*` |
-| 8. Inverser indices et valeurs | `append`, parcours par indice, lecture et écriture dans deux listes |
-| 9. Affichage en tas binaire | Compteur, variable de longueur de ligne, `print(..., end=...)` |
-| 10. Dates de l'année | Trois listes, double compteur, boucles imbriquées simples |
+| Exercice | Chapitres | Notions clés |
+|---|---|---|
+| 1. Négatif → opposé | §3, §4, §6, §11 | Parcours par indice, modification en place, `if` |
+| 2. Carrés entre deux nombres | §7, §12 | `append`, `sqrt`, `ceil`, boucle `for` |
+| 3. Consécutifs décroissants alternant de signe | §2, §6, §7 | `append`, compteur de signe, boucle `for` décroissante |
+| 4. Séparer en indices pairs/impairs | §6, §7 | Parcours par indice, `% 2`, `append` |
+| 5. Impairs puis pairs | §6, §7 | Deux boucles `for`, `append`, `% 2` |
+| 6. Rotation de liste | §9, §10, §11 | Slices, concaténation `+`, modification en place `L[:]` |
+| 7. Un, deux ou cinq | §6, §7 | `append`, compteur de position `% 3`, `//` ou `*` |
+| 8. Inverser indices et valeurs | §3, §4, §6, §7 | `append`, parcours par indice, lecture et écriture dans deux listes |
+| 9. Affichage en tas binaire | §6, §13 | Compteur, variable de longueur de ligne, `print(..., end=...)` |
+| 10. Dates de l'année | §1, §6, §13 | Trois listes, double compteur, boucles imbriquées simples |

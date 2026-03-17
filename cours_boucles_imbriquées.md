@@ -104,19 +104,19 @@ for x in L:
 3 20
 ```
 
-**Application** : chercher si un élément de `L` est aussi dans `M` (sans utiliser `in`).
+**Application** : vérifier si une liste contient au moins un élément en commun avec une autre (sans utiliser `in`).
 
 ```python
-L = [8, 9, 3, 5]
-M = [1, 2, 3, 4, 6, 8, 9]
-inter = []
+L = [7, 2, 5]
+M = [1, 3, 4, 6]
+commun = False
 
 for x in L:
     for y in M:
         if x == y:
-            inter.append(x)
+            commun = True
 
-print(inter)   # [8, 9, 3]
+print(commun)   # False
 ```
 
 Ici, pour chaque élément `x` de `L`, on parcourt toute la liste `M` pour voir si `x` y figure.
@@ -201,12 +201,29 @@ for i in range(len(L)):
 
 Un compteur initialisé avant la boucle intérieure permet de dénombrer des éléments selon un critère.
 
-**Exemple** : compter combien de fois chaque valeur apparaît dans une liste.
+**Exemple** : compter combien de fois la valeur maximale d'une liste apparaît dans cette liste.
 
-La stratégie : pour chaque élément non encore traité, compter ses occurrences avec une boucle intérieure.
+La stratégie : trouver d'abord le maximum, puis compter ses occurrences avec une boucle intérieure.
 
 ```python
-L = [81, 31, 81, 12, 81, 9, 12, 65]
+L = [3, 7, 2, 7, 5, 1, 7]
+maxi = L[0]
+for x in L:
+    if x > maxi:
+        maxi = x
+
+compteur = 0
+for x in L:
+    if x == maxi:
+        compteur = compteur + 1
+
+print(maxi, "apparaît", compteur, "fois")   # 7 apparaît 3 fois
+```
+
+Pour compter les occurrences de **toutes** les valeurs distinctes sans répétition, on peut utiliser le même principe avec une liste `dejaVus` pour mémoriser les valeurs déjà traitées :
+
+```python
+L = [4, 2, 4, 1, 2, 4]
 dejaVus = []
 
 for i in range(len(L)):
@@ -215,16 +232,14 @@ for i in range(len(L)):
         for j in range(i + 1, len(L)):
             if L[j] == L[i]:
                 compteur = compteur + 1
-        print(L[i], ":", compteur)
         dejaVus.append(L[i])
+        print(L[i], ":", compteur)
 ```
 
 ```txt
-81 : 3
-31 : 1
-12 : 2
-9 : 1
-65 : 1
+4 : 3
+2 : 2
+1 : 1
 ```
 
 > [!NOTE]
@@ -319,48 +334,47 @@ print("c")
 # Affiche : a b c
 ```
 
-**Exemple** : afficher un triangle rectangle de `n = 4` lignes où la ligne `k` contient `k` fois le nombre `k`.
+**Exemple** : afficher un triangle rectangle de `n = 4` lignes où la ligne `k` contient `k` fois le symbole `*`.
 
 ```python
 n = 4
 
 for k in range(1, n + 1):           # boucle extérieure : numéro de ligne
     for j in range(k):              # boucle intérieure : nombre d'éléments sur la ligne
-        print(k, end=" ")
+        print("*", end=" ")
     print()                         # saut de ligne à la fin de chaque ligne
 ```
 
 ```txt
-1
-2 2
-3 3 3
-4 4 4 4
+*
+* *
+* * *
+* * * *
 ```
 
 > [!TIP]
 > Le `print()` seul, **après** la boucle intérieure et **dans** la boucle extérieure, est indispensable : c'est lui qui provoque le passage à la ligne entre deux lignes du motif. Sans lui, tout s'afficherait sur une seule ligne.
 
-**Exemple avec un compteur externe** : afficher une suite d'entiers consécutifs répartis sur plusieurs lignes.
+**Exemple avec un compteur externe** : afficher un carré de `n = 3` lignes où chaque case contient un numéro séquentiel, mais en partant du bas.
 
 ```python
-n = 4
-c = 1   # compteur qui s'incrémente à chaque entier affiché
+n = 3
+c = n * n   # compteur qui décrémente à chaque case affichée
 
-for k in range(1, n + 1):
-    for j in range(k):
+for k in range(n):
+    for j in range(n):
         print(c, end=" ")
-        c = c + 1
+        c = c - 1
     print()
 ```
 
 ```txt
-1
-2 3
-4 5 6
-7 8 9 10
+9 8 7
+6 5 4
+3 2 1
 ```
 
-Le compteur `c` est initialisé **avant** les deux boucles et s'incrémente à l'intérieur de la boucle intérieure.
+Le compteur `c` est initialisé **avant** les deux boucles et se décrémente à l'intérieur de la boucle intérieure.
 
 ---
 
@@ -409,54 +423,53 @@ for a in range(3):
 
 ## 11. Condition sur deux indices simultanément
 
-Dans une double boucle avec indices `i` (ligne) et `j` (colonne), on peut écrire des conditions qui portent **sur les deux indices à la fois**. C'est utile pour produire des motifs comme un damier.
+Dans une double boucle avec indices `i` (ligne) et `j` (colonne), on peut écrire des conditions qui portent **sur les deux indices à la fois**. C'est utile pour produire des motifs comme un damier ou des formes géométriques.
 
-**Exemple** : afficher un damier `n × n` avec les symboles `X` et `.` selon que `i + j` est pair ou impair.
-
-```python
-n = 5
-
-for i in range(n):
-    for j in range(n):
-        if (i + j) % 2 == 0:
-            print("X", end="")
-        else:
-            print(".", end="")
-    print()
-```
-
-```txt
-X.X.X
-.X.X.
-X.X.X
-.X.X.
-X.X.X
-```
-
-La clé : `(i + j) % 2` vaut 0 quand `i` et `j` ont la **même parité** (tous les deux pairs ou tous les deux impairs), et 1 sinon.
-
-> [!TIP]
-> Pour un damier qui commence par une valeur donnée en haut à gauche (position `i=0, j=0`), vérifiez que `(0 + 0) % 2 == 0` correspond bien à la condition souhaitée.
-
-On peut aussi écrire des conditions plus complexes, par exemple « est-on sur la dernière ligne ? », « est-on sur la diagonale ? » :
+**Exemple** : afficher une grille `n × n` avec un motif alterné selon la **parité de `i + j`**.
 
 ```python
 n = 4
 
 for i in range(n):
     for j in range(n):
-        if i == n - 1 or j == 0:   # dernière ligne ou première colonne
-            print("*", end="")
+        if (i + j) % 2 == 0:
+            print("#", end=" ")
         else:
-            print(" ", end="")
+            print(".", end=" ")
     print()
 ```
 
 ```txt
-*
-*
-*
-****
+# . # .
+. # . #
+# . # .
+. # . #
+```
+
+La clé : `(i + j) % 2` vaut 0 quand `i` et `j` ont la **même parité** (tous les deux pairs ou tous les deux impairs), et 1 sinon.
+
+> [!TIP]
+> Pour identifier la case à afficher différemment, posez-vous la question : quelle relation entre `i` et `j` caractérise cette case ? Parité alternée : `(i + j) % 2`. Diagonale descendante : `i == j`. Diagonale montante : `i + j == n - 1`.
+
+On peut aussi combiner plusieurs conditions avec `or`. Par exemple, pour marquer la première et la dernière colonne :
+
+```python
+n = 4
+
+for i in range(n):
+    for j in range(n):
+        if j == 0 or j == n - 1:
+            print("|", end="")
+        else:
+            print(".", end="")
+    print()
+```
+
+```txt
+|..|
+|..|
+|..|
+|..|
 ```
 
 ---
@@ -477,19 +490,21 @@ for i in range(n):
     print()
 ```
 
-**Exemple** : triangle rectangle creux de côté `n = 5`. Le bord gauche est toujours `*`, la base aussi, et la diagonale est `*`.
+**Exemple** : rectangle creux de `n` lignes et `m` colonnes. Seul le contour est affiché avec `*`, l'intérieur est vide.
 
 Les conditions pour qu'une case soit `*` :
-- première colonne : `j == 0`
+- première ligne : `i == 0`
 - dernière ligne : `i == n - 1`
-- diagonale : `j == i`
+- première colonne : `j == 0`
+- dernière colonne : `j == m - 1`
 
 ```python
-n = 5
+n = 4
+m = 6
 
 for i in range(n):
-    for j in range(i + 1):   # ligne i contient i+1 caractères
-        if j == 0 or j == i or i == n - 1:
+    for j in range(m):
+        if i == 0 or i == n - 1 or j == 0 or j == m - 1:
             print("*", end="")
         else:
             print(" ", end="")
@@ -497,18 +512,17 @@ for i in range(n):
 ```
 
 ```txt
-*
-**
-* *
-*  *
-*****
+******
+*    *
+*    *
+******
 ```
 
 > [!NOTE]
-> La boucle intérieure va jusqu'à `i + 1` (et non jusqu'à `n`) : la ligne `i` ne contient que `i + 1` caractères, ce qui forme la forme triangulaire.
+> On parcourt ici une grille rectangulaire complète : la boucle intérieure va toujours de `0` à `m - 1`, quel que soit `i`.
 
 > [!TIP]
-> Avant d'écrire le code, listez les conditions qui font qu'une case est « sur le bord » : première colonne ? dernière ligne ? diagonale ? Ensuite, combinez ces conditions avec `or`.
+> Avant d'écrire le code, listez les conditions qui font qu'une case est « sur le bord » : première ligne ? dernière ligne ? première colonne ? dernière colonne ? Ensuite, combinez ces conditions avec `or`.
 
 ---
 
@@ -516,16 +530,16 @@ for i in range(n):
 
 Certains algorithmes répètent une transformation sur une liste jusqu'à ce qu'il n'en reste qu'un élément. À chaque étape, on construit une **nouvelle liste** plus courte à partir de la liste courante, puis on remplace la liste courante par la nouvelle.
 
-**Exemple** : à partir d'une liste, construire la liste des différences de termes successifs.
+**Exemple** : à partir d'une liste, construire la liste des moyennes de termes successifs (arrondie à l'entier le plus proche).
 
 ```python
-L = [9, 5, 6, 3]
+L = [10, 4, 8, 2]
 nouvelle = []
 
 for i in range(len(L) - 1):
-    nouvelle.append(L[i] - L[i + 1])
+    nouvelle.append((L[i] + L[i + 1]) // 2)
 
-print(nouvelle)   # [4, -1, 3]
+print(nouvelle)   # [7, 6, 5]
 ```
 
 On parcourt les indices de `0` à `len(L) - 2` (inclus) pour pouvoir accéder à `L[i + 1]` sans dépasser la liste.
@@ -533,15 +547,15 @@ On parcourt les indices de `0` à `len(L) - 2` (inclus) pour pouvoir accéder à
 **Répéter jusqu'à un seul élément** : on place cette transformation dans une boucle extérieure qui tourne tant que la liste contient plus d'un élément.
 
 ```python
-L = [9, 5, 6, 3, 6]
+L = [10, 4, 8, 2, 6]
 
 while len(L) > 1:
     nouvelle = []
     for i in range(len(L) - 1):
-        nouvelle.append(L[i] - L[i + 1])
+        nouvelle.append((L[i] + L[i + 1]) // 2)
     L = nouvelle   # on remplace L par la liste réduite
 
-print(L)   # [2]
+print(L)   # [6]
 ```
 
 > [!NOTE]
@@ -554,15 +568,15 @@ print(L)   # [2]
 
 ## Récapitulatif des notions par exercice
 
-| Exercice | Notions clés |
-|---|---|
-| 1. Pyramide croissante | Double boucle `for`, `print(..., end=" ")`, `print()` |
-| 2. Triangle lignes décroissantes | Double boucle `for`, `print(..., end=" ")`, `print()` |
-| 3. Motif carré et sa diagonale | Double boucle avec indices, condition `j == i`, affichage conditionnel |
-| 4. Damier de nombres | Double boucle avec indices, condition sur `(i + j) % 2` |
-| 5. Intersection de listes | Double boucle sur deux listes, `==`, `append` |
-| 6. Triangle de Floyd | Double boucle `for`, compteur externe, `print(..., end=" ")` |
-| 7. Afficher les effectifs | Double boucle avec `j > i`, compteur, liste `dejaVus` |
-| 8. Triangle et son bord | Double boucle, affichage conditionnel `*` / espace, conditions sur `i` et `j` |
-| 9. Différences successives | Boucle `while`, construction d'une nouvelle liste, `L[i] - L[i+1]` |
-| 10. Écart minimal d'indices | Double boucle avec `j > i`, variable sentinelle `None`, `abs(i - j)` |
+| Exercice | Chapitres | Notions clés |
+|---|---|---|
+| 1. Pyramide croissante | §2, §9 | Double boucle `for`, `print(..., end=" ")`, `print()` |
+| 2. Triangle lignes décroissantes | §2, §9 | Double boucle `for`, `print(..., end=" ")`, `print()` |
+| 3. Motif carré et sa diagonale | §2, §11 | Double boucle avec indices, condition `j == i`, affichage conditionnel |
+| 4. Damier de nombres | §2, §11 | Double boucle avec indices, condition sur `(i + j) % 2` |
+| 5. Intersection de listes | §3 | Double boucle sur deux listes, `==`, `append` |
+| 6. Triangle de Floyd | §9 | Double boucle `for`, compteur externe, `print(..., end=" ")` |
+| 7. Afficher les effectifs | §6 | Double boucle avec `j > i`, compteur, liste `dejaVus` |
+| 8. Triangle et son bord | §12 | Double boucle, affichage conditionnel `*` / espace, conditions sur `i` et `j` |
+| 9. Différences successives | §13 | Boucle `while`, construction d'une nouvelle liste, `L[i] - L[i+1]` |
+| 10. Écart minimal d'indices | §5, §8 | Double boucle avec `j > i`, variable sentinelle `None`, `abs(i - j)` |
